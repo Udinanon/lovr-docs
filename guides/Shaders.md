@@ -602,3 +602,21 @@ It's also possible to declare a custom sampler variable and use it to sample tex
     // texture(sampler2D(myTexture, mySampler), UV)
 
 A `Sampler` object can be sent to the shader using `Pass:send`, similar to buffers and textures.
+
+### Moving values between stages
+
+It's also possible you'll want to move a value from the Vertex shader to the Fragment shader directly, without setting up buffers or textures.
+
+For example, a vertex shader that computes a color or a component of a color for the fragment shader.
+
+These values can easiy be passed by using the `in` and `out` keywords.
+
+In the Vertex Shader declare the variable to be passed as:
+
+    layout(location = 0) out vec3 v_color;
+
+And in the Fragment shader it is received as:
+
+    layout(location = 0) in vec3 v_color;
+
+If you're using the dev branch, the `layout(location=0)` is not needed, just the `in`/`out` keywords.
